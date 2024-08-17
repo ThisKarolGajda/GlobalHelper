@@ -11,6 +11,6 @@ public class PluginDebugger {
 
     public void debug(String message) {
         // todo check if debug is activated
-        plugin.getLogger().info("[DEBUG] " + message);
+        //plugin.getLogger().info("[DEBUG] " + message);
     }
 }

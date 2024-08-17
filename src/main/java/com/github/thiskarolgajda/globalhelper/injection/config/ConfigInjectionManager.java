@@ -30,11 +30,13 @@ public class ConfigInjectionManager {
                         Object object = field.get(null);
                         debugger.debug("Found default object: " + object);
                         String key = field.getName();
-                        Object loadedObject = configManager.get(key);
+                        Object loadedObject = configManager.get(key, object);
+                        System.out.println("Loaded object: " + loadedObject + " -- " + object);
                         if (loadedObject == null) {
                             loadedObject = object;
                         }
-                        configManager.set(key, object);
+
+                        configManager.set(key, loadedObject);
                         debugger.debug("Set default message in messages.yml for key: " + key);
 
                         configManager.addComment(key, "Default: " + object);

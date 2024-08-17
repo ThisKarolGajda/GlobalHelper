@@ -11,12 +11,12 @@ public class ConfigManager {
         this.fileManager = new FileManager(plugin, "config.yml");
     }
 
-    public Object get(String key) {
-        return fileManager.getValue(key);
+    public <C> C get(String key, C defaultObject) {
+        return fileManager.getValue(key, defaultObject);
     }
 
-    public void set(String key, Object message) {
-        fileManager.setValue(key, message);
+    public void set(String key, Object object) {
+        fileManager.setValue(key, object);
     }
 
     public void addComment(String key, @NotNull String comment) {

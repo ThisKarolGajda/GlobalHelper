@@ -1,5 +1,6 @@
 package com.github.thiskarolgajda.globalhelper.util;
 
+import com.github.thiskarolgajda.globalhelper.GlobalHelper;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,8 +27,12 @@ public class ClassFinder extends Helper {
             return cachedClasses;
         }
 
-        String packageName = plugin.getClass().getPackage().getName().replace("/", ".");
         cachedClasses = new HashSet<>();
+        // Get GlobalHelper classes
+        findClassesRecursively(GlobalHelper.class.getPackage().getName().replace("/", "."), cachedClasses);
+
+        // Get plugin classes
+        String packageName = plugin.getClass().getPackage().getName().replace("/", ".");
         findClassesRecursively(packageName, cachedClasses);
         return cachedClasses;
     }

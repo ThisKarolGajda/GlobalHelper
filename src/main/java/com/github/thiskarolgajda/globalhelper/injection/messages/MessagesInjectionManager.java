@@ -32,15 +32,9 @@ public class MessagesInjectionManager {
                         if (defaultTranslation instanceof String string) {
                             debugger.debug("Found default translation String: " + string);
                             String key = field.getName();
-                            String loadedMessage = messagesManager.getMessage(key);
-                            if (loadedMessage == null) {
-                                loadedMessage = string;
-                            }
-
-                            messagesManager.setMessage(key, string);
+                            String loadedMessage = messagesManager.getMessage(key, string);
+                            messagesManager.setMessage(key, loadedMessage);
                             debugger.debug("Set default message in messages.yml for key: " + key);
-
-
                             messagesManager.addComment(key, "Default: " + string + ((!messageInjection.comment().isBlank()) ? "\n" + messageInjection.comment() : ""));
                             field.set(null, loadedMessage);
                             debugger.debug("Injected value into field: " + field.getName() + " of class: " + clazz.getName());

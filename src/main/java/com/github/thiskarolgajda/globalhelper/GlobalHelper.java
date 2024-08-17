@@ -11,11 +11,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 @SuppressWarnings("unused")
 public abstract class GlobalHelper extends JavaPlugin {
+    //todo add so if field starts with (ignore case) inject_ it will inject the same as if it was using annotation
 
     @Override
     public void onEnable() {
-        enable();
-
         // Dependency injection initialization
         DependencyInjection.register(new PluginDebugger(this));
         DependencyInjection.registerInject(new ClassFinder(this));
@@ -29,6 +28,8 @@ public abstract class GlobalHelper extends JavaPlugin {
         DependencyInjection.registerInject(new MessagesInjectionManager());
         DependencyInjection.registerInject(new ConfigManager(this));
         DependencyInjection.registerInject(new ConfigInjectionManager());
+
+        enable();
     }
 
     @Override
@@ -42,11 +43,11 @@ public abstract class GlobalHelper extends JavaPlugin {
         load();
     }
 
-    abstract void load();
+    public abstract void load();
 
-    abstract void enable();
+    public abstract void enable();
 
-    abstract void disable();
+    public abstract void disable();
 
     public static GlobalHelper getInstance() {
         return DependencyInjection.get(GlobalHelper.class);

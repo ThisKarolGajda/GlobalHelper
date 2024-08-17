@@ -11,8 +11,8 @@ public class MessagesManager {
         this.fileManager = new FileManager(plugin, "messages.yml");
     }
 
-    public String getMessage(String key) {
-        return fileManager.getValue(key);
+    public @NotNull String getMessage(String key, String defaultValue) {
+        return fileManager.getValue(key, defaultValue);
     }
 
     public void setMessage(String key, String message) {
